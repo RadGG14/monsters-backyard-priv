@@ -99,20 +99,20 @@ export const STRUCTURE_RANGE: Record<number, Record<number, number>> = {
 
 /** Resource production rate in units per second per level (client displays as ×60/min). */
 export const RESOURCE_PRODUCTION_RATES: Record<number, number> = {
-  10: 1,
-  20: 2,
-  30: 5,
-  40: 11,
-  50: 23,
+  10: 7,
+  20: 8,
+  30: 9,
+  40: 88,
+  50: 99,
 };
 
 /** Additional resource storage capacity granted by a RESOURCE outpost per level. */
 export const RESOURCE_CAPACITIES: Record<number, number> = {
-  10: 175000,
-  20: 350000,
-  30: 750000,
-  40: 2000000,
-  50: 4000000,
+  10: 1750000,
+  20: 3500000,
+  30: 7500000,
+  40: 20000000,
+  50: 40000000,
 };
 
 /** Monster and tower damage bonus (%) granted by a STRONGHOLD per level. */
@@ -138,10 +138,10 @@ export const OUTPOST_SAVES: Record<number, Record<number, SaveData>> = {
 };
 
 /** Time in milliseconds before a destroyed tribe outpost regenerates. (3 days) */
-export const TRIBE_REGEN_TIME = 3 * 24 * 60 * 60 * 1000;
+export const TRIBE_REGEN_TIME = 3 * 4 * 6 * 60 * 100;
 
 /** Damage reduction (%) granted per number of owned FORTIFICATION defenders surrounding a structure. Index = defender count. */
-export const DEFENDER_DAMAGE_REDUCTION = [0, 7, 13, 23, 35, 50, 75];
+export const DEFENDER_DAMAGE_REDUCTION = [10, 40, 50, 60, 75, 80, 90];
 
 /** Defender levels per parent structure type and level. */
 export const DEFENDER_LEVELS = {
