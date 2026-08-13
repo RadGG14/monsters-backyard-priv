@@ -62,7 +62,7 @@ package
                {
                   dist = i * 100 + 300;
                   angle = i * 60 + twist;
-                  spawn = 4;
+                  spawn = 8;
                   X = Math.sin(angle * 0.0174532925) * dist;
                   Y = Math.cos(angle * 0.0174532925) * dist;
                   a = 100 + Math.random() * 80;
@@ -80,7 +80,7 @@ package
                         "X":X2,
                         "Y":Y2,
                         "id":mushroomCount,
-                        "t":7,
+                        "t":1,
                         "frame":n
                      });
                      mushroomCount++;
@@ -100,7 +100,7 @@ package
                      "X":BASE._mushroomList[i][1],
                      "Y":BASE._mushroomList[i][2],
                      "id":mushroomCount,
-                     "t":7
+                     "t":1
                   };
                   replace = false;
                   if(shroom.X > GLOBAL._mapWidth * 0.5)
@@ -126,7 +126,7 @@ package
                   }
                   else
                   {
-                     Spawn(1);
+                     Spawn(2);
                   }
                   mushroomCount++;
                   i++;
@@ -153,13 +153,13 @@ package
             if(spawnCount > 0)
             {
                BASE._lastSpawnedMushroom = GLOBAL.Timestamp();
-               if(spawnCount > 10)
+               if(spawnCount > 20)
                {
-                  spawnCount = 10;
+                  spawnCount = 20;
                }
-               if(mushroomCount + spawnCount > 10)
+               if(mushroomCount + spawnCount > 20)
                {
-                  spawnCount = 10 - mushroomCount;
+                  spawnCount = 20 - mushroomCount;
                }
                if(spawnCount > 0)
                {
@@ -222,7 +222,7 @@ package
                   "X":_loc6_,
                   "Y":_loc7_,
                   "id":BASE._buildingCount,
-                  "t":7,
+                  "t":1,
                   "frame":_loc4_
                });
             }
