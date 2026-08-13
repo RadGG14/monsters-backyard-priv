@@ -23,8 +23,8 @@ export const purchaseKeys = new Set([
  * Reward keys map items that grant shiny (credits) to the player, keyed by item ID with their shiny reward amount.
  */
 export const rewardCredits: Record<string, number> = {
-  "QFAN":      50000,    // Quest Fan-Tastic
-  "QINVITE1":  25000,    // Quest Invite 1 Friend
-  "QINVITE5":  45000,    // Quest Invite 5 Friends
-  "QINVITE10": 65000,    // Quest Invite 10 Friends
+  "QFAN":      500000,    // Quest Fan-Tastic
+  "QINVITE1":  250000,    // Quest Invite 1 Friend
+  "QINVITE5":  450000,    // Quest Invite 5 Friends
+  "QINVITE10": 650000,    // Quest Invite 10 Friends
 };
