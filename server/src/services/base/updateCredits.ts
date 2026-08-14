@@ -27,7 +27,7 @@ export const updateCredits = (ctx: Context, save: Save, item: string, quantity: 
   }
 
   // Handle mushrooms
-  const mushroomCredits: Mushrooms = { MUSHROOM1: 99999, MUSHROOM2: 9999999, MUSHROOM3: 999999 };
+  const mushroomCredits: Mushrooms = { MUSHROOM1: 3, MUSHROOM2: 8, MUSHROOM3: 3 };
   if (item in mushroomCredits) {
     userSave.credits += mushroomCredits[item as keyof Mushrooms];
     return;
