@@ -14,6 +14,7 @@ import { leaveWorld } from "../../../services/maproom/v2/leaveWorld.js";
 import { MapRoomCell } from "../../../enums/MapRoom.js";
 import { relocateOutpostErr } from "../../../errors/errors.js";
 import { MigrateBaseSchema } from "../../../schemas/MigrateBaseSchema.js";
+import { clampShiny } from "../../../config/GameConfig.js";
 
 /**
  * Cooldown period for base migration.
@@ -115,7 +116,7 @@ export const migrateBase: KoaController = async (ctx) => {
     delete userSave.buildingresources[`b${outpostBaseId}`];
   }
 
-  if (shiny) userSave.credits = userSave.credits - shiny;
+  if (shiny) userSave.credits = clampShiny(userSave.credits - shiny);
   if (resources)
     userSave.resources = updateResources(resources, userSave.resources ?? {}, Operation.SUBTRACT);
 

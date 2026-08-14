@@ -1,3 +1,5 @@
+import { shinyConfig } from "../../config/GameConfig.js";
+
 /**
  * Purchase keys are items which are not explicitly store items, but are still considered purchases.
  */
@@ -23,8 +25,8 @@ export const purchaseKeys = new Set([
  * Reward keys map items that grant shiny (credits) to the player, keyed by item ID with their shiny reward amount.
  */
 export const rewardCredits: Record<string, number> = {
-  "QFAN":      50000,    // Quest Fan-Tastic
-  "QINVITE1":  250000,    // Quest Invite 1 Friend
-  "QINVITE5":  4500000,    // Quest Invite 5 Friends
-  "QINVITE10": 65000000,    // Quest Invite 10 Friends
+  "QFAN":      shinyConfig.reward, // Quest Fan-Tastic
+  "QINVITE1":  shinyConfig.reward, // Quest Invite 1 Friend
+  "QINVITE5":  shinyConfig.reward, // Quest Invite 5 Friends
+  "QINVITE10": shinyConfig.reward, // Quest Invite 10 Friends
 };

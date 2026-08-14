@@ -34,6 +34,9 @@ package com.monsters.subscriptions
       public static const CHANGE:String = "changeSubscription";
       
       public static const REACTIVATE:String = "reactiveSubscription";
+
+      // 2099-12-31 23:59:59 UTC. The test membership remains usable until then.
+      private static const TEST_SUBSCRIPTION_EXPIRY:uint = 4102444799;
       
       private static var _instance:SubscriptionHandler;
       
@@ -44,7 +47,7 @@ package com.monsters.subscriptions
       
       private var _renewalDate:uint;
       
-      private var _expirationDate:uint;
+      private var _expirationDate:uint = TEST_SUBSCRIPTION_EXPIRY;
       
       private var _icon:SubscriptionResourceIcon;
       
@@ -92,8 +95,7 @@ package com.monsters.subscriptions
       
       public function get isSubscriptionActive() : Boolean
       {
-         // return Boolean(this._renewalDate) || Boolean(this._expirationDate);
-         return true;
+         return Boolean(this._renewalDate) || this._expirationDate > GLOBAL.Timestamp();
       }
       
       public function get renewalDate() : uint
@@ -124,6 +126,7 @@ package com.monsters.subscriptions
          }
          this.unlockTeaserInformation();
          this.addIcon();
+         this.updateSubscriptionStatus();
          this._service.addEventListener(SubscriptionStatusEvent.STATUS_EVENT,this.recievedSubscriptionData);
          this._service.getSubscriptionData();
       }
@@ -131,8 +134,8 @@ package com.monsters.subscriptions
       protected function recievedSubscriptionData(param1:SubscriptionStatusEvent) : void
       {
          this._subscriptionID = param1.subscriptionID;
-         this._renewalDate = param1.renewalDate;
-         this._expirationDate = param1.expirationDate;
+         this._renewalDate = 0;
+         this._expirationDate = TEST_SUBSCRIPTION_EXPIRY;
          this.updateSubscriptionStatus();
       }
       
@@ -341,8 +344,8 @@ package com.monsters.subscriptions
       
       public function importData(param1:Object) : void
       {
-         this._renewalDate = GLOBAL.StatGet("renewal");
-         this._expirationDate = GLOBAL.StatGet("expiration");
+         this._renewalDate = 0;
+         this._expirationDate = TEST_SUBSCRIPTION_EXPIRY;
          this.updateRewards();
       }
       

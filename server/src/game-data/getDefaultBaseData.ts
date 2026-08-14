@@ -1,4 +1,4 @@
-import { devConfig } from "../config/GameConfig.js";
+import { clampShiny, devConfig } from "../config/GameConfig.js";
 import { User } from "../models/user.model.js";
 import { getCurrentDateTime } from "../utils/getCurrentDateTime.js";
 import { Reward } from "../enums/Rewards.js";
@@ -28,7 +28,7 @@ export const getDefaultBaseData = (user: User, baseType: BaseType) => {
     userid: user.userid,
     cellid: -1,
     name: user.username,
-    credits: devConfig.shiny || 10000000,
+    credits: clampShiny(devConfig.shiny),
     createtime: currentTime,
     protected: currentTime + sevenDays,
 

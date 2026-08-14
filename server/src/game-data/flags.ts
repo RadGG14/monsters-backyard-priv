@@ -79,9 +79,9 @@ export const getFlags = () => ({
   ers: 0, // Used for enabling canScheduleNewEvent() in ReplayableEventHandler.as on client
   krallen: 1,
   subscriptions: 1,
-  krallen_duration: 7777777,
-  subscriptions_ab: 1,
-  subscriptions_ab_admin: 1,
+  krallen_duration: 9999,
+  subscriptions_ab: 0,
+  subscriptions_ab_admin: 0,
   krallen_award_threshold: 250000000,
   krallen_special1_award_threshold: 750000000,
   krallen_special2_award_threshold: 7000000000,

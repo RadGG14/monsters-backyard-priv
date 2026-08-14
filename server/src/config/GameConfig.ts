@@ -1,6 +1,22 @@
 import { Env } from "../enums/Env.js";
 import { MessageType } from "../enums/MessageType.js";
 
+/** Test-game shiny settings shared by all server-side award paths. */
+export const shinyConfig = {
+  limit: 9_999_999,
+  default: 999_999,
+  reward: 99_999,
+  quest: 9_999,
+  mushroom: {
+    regular: 9_999,
+    bonus: 99_999,
+  },
+} as const;
+
+/** Keeps shiny within its supported test-game range. */
+export const clampShiny = (value: number) =>
+  Math.min(shinyConfig.limit, Math.max(0, value));
+
 /** Visit our Wiki to get more information on each flag.
  * Wiki: https://github.com/bym-refitted/backyard-monsters-refitted/wiki/Dev-Settings-%E2%80%90-Configuration
  */
@@ -24,7 +40,7 @@ export const devConfig = {
    * Set the default amount of shiny on the user's account.
    * Must be set before creating a new record.
    */
-  shiny: 15000000,
+  shiny: shinyConfig.default,
 
   /*
    * Enable or disable the debug console. Requires a client restart.

@@ -3,6 +3,7 @@ import mikroOrmConfig from "../mikro-orm.config.js";
 import { MikroORM } from "@mikro-orm/core";
 import { Save } from "../models/save.model.js";
 import { BaseType } from "../enums/Base.js";
+import { clampShiny, shinyConfig } from "../config/GameConfig.js";
 
 /**
  * This script is responsible for adding shiny to all main yard saves.
@@ -23,7 +24,7 @@ import { BaseType } from "../enums/Base.js";
       return;
     }
 
-    const shinyAmount = 400000000;
+    const shinyAmount = shinyConfig.reward;
 
     const orm = await MikroORM.init(mikroOrmConfig);
     const em = orm.em.fork();
@@ -33,8 +34,11 @@ import { BaseType } from "../enums/Base.js";
     console.log(`Adding ${shinyAmount} credits to each save...`);
 
     for (const save of saves) {
-      save.credits += shinyAmount;
-      save.monthly_credits += shinyAmount;
+      const currentCredits = clampShiny(save.credits);
+      const awardedCredits = Math.min(shinyAmount, shinyConfig.limit - currentCredits);
+
+      save.credits = currentCredits + awardedCredits;
+      save.monthly_credits += awardedCredits;
     }
 
     await em.flush();

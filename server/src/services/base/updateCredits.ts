@@ -4,12 +4,20 @@ import { type StoreItem, storeItems } from "../../game-data/store/storeItems.js"
 import { purchaseKeys, rewardCredits } from "../../game-data/store/purchaseKeys.js";
 import { User } from "../../models/user.model.js";
 import type { Context } from "koa";
+import { clampShiny, shinyConfig } from "../../config/GameConfig.js";
 
 interface Mushrooms {
   MUSHROOM1: number;
   MUSHROOM2: number;
   MUSHROOM3: number;
 }
+
+const hasCollectedReward = (save: Save, item: string, quantity: number) =>
+  (save.storedata?.[item]?.q ?? 0) > quantity;
+
+const grantShiny = (save: Save, amount: number) => {
+  save.credits = clampShiny(save.credits + amount);
+};
 
 /**
  *  Keeps track of shiny (credits) spent and obtained.
@@ -27,23 +35,36 @@ export const updateCredits = (ctx: Context, save: Save, item: string, quantity: 
   }
 
   // Handle mushrooms
-  const mushroomCredits: Mushrooms = { MUSHROOM1: 3, MUSHROOM2: 8, MUSHROOM3: 3 };
+  const mushroomCredits: Mushrooms = {
+    MUSHROOM1: shinyConfig.mushroom.regular,
+    MUSHROOM2: shinyConfig.mushroom.bonus,
+    MUSHROOM3: shinyConfig.mushroom.regular,
+  };
   if (item in mushroomCredits) {
-    userSave.credits += mushroomCredits[item as keyof Mushrooms];
+    grantShiny(userSave, mushroomCredits[item as keyof Mushrooms]);
     return;
   }
 
-  // Handle quest rewards that grant credits
+  // Handle special quest rewards that grant the higher test reward.
   if (item in rewardCredits) {
-    const collected = (save.storedata?.[item]?.q ?? 0) > quantity;
+    const collected = hasCollectedReward(save, item, quantity);
 
-    if (!collected) userSave.credits += rewardCredits[item];
+    if (!collected) grantShiny(userSave, rewardCredits[item]);
     return;
   }
 
   // Handle purchases not in the store
   if (purchaseKeys.has(item)) {
-    userSave.credits -= quantity;
+    userSave.credits = clampShiny(userSave.credits - quantity);
+    return;
+  }
+
+  // Every regular quest pays the shared test quest reward. The client sends
+  // quest IDs with a Q prefix and the purchase count prevents repeat claims.
+  if (item.startsWith("Q")) {
+    const collected = hasCollectedReward(save, item, quantity);
+
+    if (!collected) grantShiny(userSave, shinyConfig.quest);
     return;
   }
 
@@ -64,5 +85,5 @@ export const updateCredits = (ctx: Context, save: Save, item: string, quantity: 
     itemCost = storeItem.c[currentQuantity];
   }
 
-  userSave.credits -= itemCost * quantity;
+  userSave.credits = clampShiny(userSave.credits - itemCost * quantity);
 };

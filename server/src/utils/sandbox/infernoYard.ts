@@ -1,5 +1,6 @@
 import { User } from "../../models/user.model.js";
 import { getCurrentDateTime } from "../getCurrentDateTime.js";
+import { shinyConfig } from "../../config/GameConfig.js";
 
 export const infernoYardSandbox = (user?: User) => {
   return {
@@ -31,7 +32,7 @@ export const infernoYardSandbox = (user?: User) => {
     protected: 1,
     lastupdate: 0,
     usemap: 1,
-    credits: 980412,
+    credits: shinyConfig.default,
     champion: [],
     worldid: "",
     event_score: 0,

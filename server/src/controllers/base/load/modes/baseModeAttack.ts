@@ -14,6 +14,7 @@ import { createAttackLog } from "../../../../services/base/createAttackLog.js";
 import { updateResources, Operation } from "../../../../services/base/updateResources.js";
 import { isAttackActive } from "../../../../services/base/isAttackActive.js";
 import { baseUnderAttackErr, baseProtectedErr, userOnlineErr, truceActiveErr } from "../../../../errors/errors.js";
+import { clampShiny } from "../../../../config/GameConfig.js";
 import { redis } from "../../../../server.js";
 import { isTruceActive } from "../../../../services/mail/isTruceActive.js";
 import { MR1_TRIBE_IDS } from "../../../../game-data/tribes/v1/index.js";
@@ -137,7 +138,7 @@ export const baseModeAttack = async ({ user, baseid, mapversion, attackCost }: B
       const [r1, r2, r3] = attackCost.resources;
       updateResources({ r1, r2, r3 }, userSave.resources!, Operation.SUBTRACT);
     } else if (attackCost.shiny) {
-      userSave.credits = Math.max(0, userSave.credits - attackCost.shiny);
+      userSave.credits = clampShiny(userSave.credits - attackCost.shiny);
     }
   }
 

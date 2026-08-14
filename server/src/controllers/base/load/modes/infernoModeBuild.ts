@@ -7,6 +7,7 @@ import { calculateBaseLevel } from "../../../../services/base/calculateBaseLevel
 import { createInfernoTribes } from "../../../../services/maproom/inferno/createInfernoTribes.js";
 import { isAttackActive } from "../../../../services/base/isAttackActive.js";
 import { baseUnderAttackErr, permissionErr } from "../../../../errors/errors.js";
+import { clampShiny } from "../../../../config/GameConfig.js";
 
 /**
  * Retrieves the save data for the user based on their Inferno mode request.
@@ -40,7 +41,7 @@ export const infernoModeBuild = async (user: User) => {
   // Create Inferno tribes based on the user's current level
   infernoSave.wmstatus = await createInfernoTribes(infernoSave, INFERNO_TRIBES);
 
-  infernoSave.credits = userSave.credits;
+  infernoSave.credits = clampShiny(userSave.credits);
   infernoSave.resources = userSave.iresources;
 
   if (userSave.stats?.["other"] && stats?.["other"])

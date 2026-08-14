@@ -10,6 +10,10 @@ package
       public static var _mushroom:BFOUNDATION;
       
       public static var _mushroomID:int;
+
+      private static const MUSHROOM_SHINY_REWARD:int = 9999;
+
+      private static const BONUS_MUSHROOM_SHINY_REWARD:int = 99999;
        
       
       public function MUSHROOMS()
@@ -279,7 +283,7 @@ package
             
             if (mushroomVariant == 3) mushroomVariant = 1;
 
-            shinyAwarded = mushroomVariant == 2 ? 8 : 3;
+            shinyAwarded = mushroomVariant == 2 ? BONUS_MUSHROOM_SHINY_REWARD : MUSHROOM_SHINY_REWARD;
             workerMessage = KEYS.Get("pop_mushroom_msg1", { "v1":shinyAwarded });
 
             BASE.Purchase("MUSHROOM" + mushroomVariant, 1, "MUSHROOMS");

@@ -27,6 +27,8 @@ package
       public static var _open:Boolean;
       
       public static var _infernoQuests:Array;
+
+      private static const TEST_QUEST_SHINY_REWARD:int = 9999;
        
       
       public function QUESTS()
@@ -1590,11 +1592,25 @@ package
             "siegeweapon_rewardcount":1,
             "rules":{"siege_jars_level":10}
          });
+         applyTestQuestShinyRewards(_mainQuests);
+      }
+
+      private static function applyTestQuestShinyRewards(param1:Array) : void
+      {
+         var _loc2_:Object = null;
+         for each(_loc2_ in param1)
+         {
+            if(_loc2_.reward && _loc2_.reward.length > 4)
+            {
+               _loc2_.reward[4] = TEST_QUEST_SHINY_REWARD;
+            }
+         }
       }
       
       public static function setupInfernoQuests() : void
       {
          _infernoQuests = INFERNO_QUESTS._infernoQuests;
+         applyTestQuestShinyRewards(_infernoQuests);
       }
       
       public static function Data(param1:Object) : void

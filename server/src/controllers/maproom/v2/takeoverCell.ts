@@ -13,6 +13,7 @@ import { getCurrentDateTime } from "../../../utils/getCurrentDateTime.js";
 import { validateRange } from "../../../services/maproom/v2/validateRange.js";
 import { TakeoverCellSchema } from "../../../schemas/TakeoverCellSchema.js";
 import { takeoverCellErr } from "../../../errors/errors.js";
+import { clampShiny } from "../../../config/GameConfig.js";
 
 /**
  * Controller to handle the takeover of a cell on the world map via shiny or resources.
@@ -50,7 +51,7 @@ export const takeoverCell: KoaController = async (ctx) => {
 
   await validateRange(currentUser, userSave, mapversion, { attackCell: cell });
 
-  if (shiny) userSave.credits = userSave.credits - shiny;
+  if (shiny) userSave.credits = clampShiny(userSave.credits - shiny);
   if (resources)
     userSave.resources = updateResources(
       resources,
