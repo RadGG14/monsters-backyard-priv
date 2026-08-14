@@ -24,7 +24,7 @@ export const getFlags = () => ({
 
   // Settings:
   maproom: 1,
-  maproom2: 0, // controlled by baseLoad.ts based on town hall level
+  maproom2: 1, // controlled by baseLoad.ts based on town hall level
   mr2upgraded: 0,
   inferno: devConfig.inferno ? 1 : 0,
   infernoMapBlocked: devConfig.infernoMaproom ? 1 : 0,
@@ -41,7 +41,7 @@ export const getFlags = () => ({
   efl: 200,
   sal: 0,
   numchatrooms: 0,
-  savedelay: 3,
+  savedelay: 2,
   fb_api_curl_timeout: 2,
   pageinterval: 25,
   empire_value_limit: 831186222,
@@ -53,11 +53,11 @@ export const getFlags = () => ({
   leaderboard: 1,
   fanfriendbookmarkquests: 1,
   ticker: 0,
-  chat: 2, // Enable chat (0=disabled, 1=no display, 2=display)
+  chat: 0, // Enable chat (0=disabled, 1=no display, 2=display)
   invites: 0, // Diable friend invites
   gifts: 0, // Disable gifts
   event1: 1,
-  event2: 0,
+  event2: 1,
   ...getInvasionFlags(),
   iframestart_override: 0,
   mushrooms: 1,
@@ -68,7 +68,7 @@ export const getFlags = () => ({
   countrycodeblacklist: "",
   radio: 1,
   plinko: 0,
-  midgameIncentive: 0,
+  midgameIncentive: 1,
   showFBCEarn: 1,
   trialpayDealspot: 1,
   showFBCDaily: 0,
@@ -79,9 +79,9 @@ export const getFlags = () => ({
   ers: 0, // Used for enabling canScheduleNewEvent() in ReplayableEventHandler.as on client
   krallen: 1,
   subscriptions: 1,
-  krallen_duration: 7,
-  subscriptions_ab: 0,
-  subscriptions_ab_admin: 0,
+  krallen_duration: 7777777,
+  subscriptions_ab: 1,
+  subscriptions_ab_admin: 1,
   krallen_award_threshold: 250000000,
   krallen_special1_award_threshold: 750000000,
   krallen_special2_award_threshold: 7000000000,
