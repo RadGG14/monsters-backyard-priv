@@ -24,7 +24,7 @@ export const purchaseKeys = new Set([
  */
 export const rewardCredits: Record<string, number> = {
   "QFAN":      505050,    // Quest Fan-Tastic
-  "QINVITE1":  252525,    // Quest Invite 1 Friend
-  "QINVITE5":  454545,    // Quest Invite 5 Friends
-  "QINVITE10": 656565,    // Quest Invite 10 Friends
+  "QINVITE1":  99999,    // Quest Invite 1 Friend
+  "QINVITE5":  99999,    // Quest Invite 5 Friends
+  "QINVITE10": 99999,    // Quest Invite 10 Friends
 };
