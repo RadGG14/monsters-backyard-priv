@@ -18,12 +18,12 @@ import { BaseType } from "../enums/Base.js";
     const now = new Date();
     const utcDay = now.getUTCDate();
 
-    if (utcDay !== 20) {
-      console.log(`Exiting: Current UTC day is ${utcDay}, not the 20th.`);
+    if (utcDay !== 15) {
+      console.log(`Exiting: Current UTC day is ${utcDay}, not the 15th.`);
       return;
     }
 
-    const shinyAmount = 400;
+    const shinyAmount = 420402;
 
     const orm = await MikroORM.init(mikroOrmConfig);
     const em = orm.em.fork();
