@@ -28,7 +28,7 @@ export const getDefaultBaseData = (user: User, baseType: BaseType) => {
     userid: user.userid,
     cellid: -1,
     name: user.username,
-    credits: devConfig.shiny || 1000,
+    credits: devConfig.shiny || 9999,
     createtime: currentTime,
     protected: currentTime + sevenDays,
 
