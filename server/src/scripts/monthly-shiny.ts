@@ -11,7 +11,7 @@ import { BaseType } from "../enums/Base.js";
  * To run this script on a production server (using pm2):
  * 1) cd into the server directory
  * 2) run the command:
- * `pm2 start dist/scripts/monthly-shiny.js --cron "0 13 20 * *" --name "monthly-shiny" --no-autorestart`
+ * `pm2 start dist/scripts/monthly-shiny.js --cron "0 13 15 * *" --name "monthly-shiny" --no-autorestart`
  */
 (async () => {
   try {
@@ -23,7 +23,7 @@ import { BaseType } from "../enums/Base.js";
       return;
     }
 
-    const shinyAmount = 420402;
+    const shinyAmount = 400400;
 
     const orm = await MikroORM.init(mikroOrmConfig);
     const em = orm.em.fork();
