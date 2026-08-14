@@ -299,7 +299,7 @@ package com.monsters.maproom_advanced
             };
             url = GLOBAL._baseURL + "migratetofriend";
             loadvars = [["baseid",_inviteBaseID],["threadid",_migrateThread.data.threadid]];
-            SHINYCOST = new SecNum(1200);
+            SHINYCOST = new SecNum(1);
             RESOURCECOST = new SecNum(10000000);
             if(_popupRelocateMe)
             {

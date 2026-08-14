@@ -625,7 +625,7 @@ package com.monsters.maproom_advanced
                }
             }
             _takeoverCost = new SecNum(_loc2_);
-            _shinyCost = new SecNum(Math.ceil(Math.pow(Math.sqrt(_takeoverCost.Get() * 2),0.75)));
+            _shinyCost = new SecNum(1);
             if(_takeoverCost.Get() == 0)
             {
                this.TakeOverConfirm();

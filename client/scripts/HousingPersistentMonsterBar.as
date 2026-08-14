@@ -41,7 +41,7 @@ package
          {
             return 0;
          }
-         _loc2_ = STORE.GetTimeCost(_loc3_,false) * GLOBAL.ABTestHealingTimeShinyMod();
+         _loc2_ = STORE.GetTimeCost(_loc3_,false);
          return Math.max(_loc2_,1);
       }
       

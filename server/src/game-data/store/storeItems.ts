@@ -1309,3 +1309,10 @@ export const storeItems: { [key: string]: StoreItem } = {
     a: 1,
   },
 };
+
+// Test-game economy: retain free and unavailable entries as-is, but make every
+// positive shiny price one shiny. Keeping the arrays intact also preserves
+// level-based item availability without retaining the escalating prices.
+for (const storeItem of Object.values(storeItems)) {
+  storeItem.c = storeItem.c.map((cost) => (cost > 0 ? 1 : cost));
+}

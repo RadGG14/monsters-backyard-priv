@@ -1904,7 +1904,7 @@ package
 
       public static function getShinyCostFromResourceAmt(param1:Number):int
       {
-         return Math.ceil(Math.pow(Math.sqrt(param1 / 2), 0.75));
+         return param1 > 0 ? 1 : 0;
       }
 
       public static function ABTestHealingTimeShinyMod():Number
@@ -2309,14 +2309,6 @@ package
 
       public static function ValidateMushroomPick(param1:BFOUNDATION):void
       {
-         var _loc2_:Rndm = new Rndm(int(param1.x * param1.y));
-         if (int(_loc2_.random() * 16) >> 2)
-         {
-            LOGGER.Log("log", "Invalid shinyshroom");
-            GLOBAL.ErrorMessage("GLOBAL mushroom hack 1");
-            _shinyShroomValid = false;
-            return;
-         }
          var _loc3_:int = int(_shinyShrooms.length);
          var _loc4_:int = 0;
          while (_loc4_ < _loc3_)

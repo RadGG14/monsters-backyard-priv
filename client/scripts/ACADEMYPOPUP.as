@@ -151,13 +151,7 @@ package
       
       private function CalculateInstantCost() : void
       {
-         var _loc1_:Array = CREATURELOCKER._creatures[_monsterID].trainingCosts[GLOBAL.player.m_upgrades[_monsterID].level - 1];
-         var _loc2_:String = KEYS.Get(CREATURELOCKER._creatures[_monsterID].name);
-         var _loc3_:int = int(_loc1_[0]);
-         var _loc4_:int = int(_loc1_[1]);
-         var _loc5_:int = STORE.GetTimeCost(_loc4_);
-         var _loc6_:int = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
-         _instantUpgradeCost = _loc5_ + _loc6_;
+         _instantUpgradeCost = 1;
       }
       
       public function Update(param1:Boolean = false) : void

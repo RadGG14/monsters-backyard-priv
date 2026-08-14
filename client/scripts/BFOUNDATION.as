@@ -2459,24 +2459,12 @@ package
          {
             return 0;
          }
-         _loc3_ = Math.ceil(_loc2_ * 20 / 60 / 60);
-         _loc4_ = int(Math.sqrt(_loc2_ * 0.8));
-         return Math.min(_loc3_,_loc4_);
+         return STORE.GetTimeCost(_loc2_);
       }
       
       public function InstantBuildCost() : int
       {
-         var _loc1_:Object = GLOBAL._buildingProps[this._type - 1].costs[0];
-         var _loc2_:int = int(_loc1_.time.Get());
-         if(_loc2_ <= 300)
-         {
-            _loc2_ = 0;
-         }
-         var _loc3_:int = _loc1_.r1.Get() + _loc1_.r2.Get() + _loc1_.r3.Get();
-         var _loc4_:int = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
-         var _loc5_:int = STORE.GetTimeCost(_loc2_);
-         var _loc6_:int = _loc4_ + _loc5_;
-         return int(_loc6_ * 0.95);
+         return 1;
       }
       
       public function InstantFortifyCost() : int
@@ -2485,17 +2473,7 @@ package
          {
             return 0;
          }
-         var _loc1_:Object = this._buildingProps.fortify_costs[this._fortification.Get()];
-         var _loc2_:int = int(_loc1_.time.Get());
-         if(_loc2_ <= 300)
-         {
-            _loc2_ = 0;
-         }
-         var _loc3_:int = _loc1_.r1.Get() + _loc1_.r2.Get() + _loc1_.r3.Get();
-         var _loc4_:int = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
-         var _loc5_:int = STORE.GetTimeCost(_loc2_);
-         var _loc6_:int = _loc4_ + _loc5_;
-         return int(_loc6_ * 0.95);
+         return 1;
       }
       
       public function InstantUpgradeCost() : int
@@ -2504,17 +2482,7 @@ package
          {
             return 0;
          }
-         var _loc1_:Object = this._buildingProps.costs[this._lvl.Get()];
-         var _loc2_:int = int(_loc1_.time.Get());
-         if(_loc2_ <= 300)
-         {
-            _loc2_ = 0;
-         }
-         var _loc3_:int = _loc1_.r1.Get() + _loc1_.r2.Get() + _loc1_.r3.Get();
-         var _loc4_:int = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
-         var _loc5_:int = STORE.GetTimeCost(_loc2_);
-         var _loc6_:int = _loc4_ + _loc5_;
-         return int(_loc6_ * 0.95);
+         return 1;
       }
       
       public function DoInstantUpgrade() : Boolean

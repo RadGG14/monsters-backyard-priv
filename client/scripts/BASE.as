@@ -2858,7 +2858,7 @@ package
                _loc13_ += _loc6_ - _loc14_;
                _loc6_ = Number(BASE._iresources.r4.Get());
             }
-            _loc15_ = Math.ceil(Math.pow(Math.sqrt(_loc13_ / 2), 0.75));
+            _loc15_ = _loc13_ > 0 ? 1 : 0;
             _loc16_ = _loc9_ ? "msg_moremagmaheal" : "msg_moreresourcesheal";
             GLOBAL.Message(KEYS.Get(_loc16_, {
                         "v1": GLOBAL.FormatNumber(_loc13_),
@@ -3628,7 +3628,7 @@ package
                return false;
             }
             ++GLOBAL._shinyShroomCount;
-            if (GLOBAL._shinyShroomCount > 30)
+            if (GLOBAL._shinyShroomCount > 9999)
             {
                LOGGER.Log("log", "Too many shiny shrooms in session");
                GLOBAL.ErrorMessage("BASE.Save Mushroom hack 2");

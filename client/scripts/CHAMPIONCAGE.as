@@ -435,6 +435,10 @@ package
       {
          var _loc5_:Object = null;
          var _loc6_:int = 0;
+         if(param3 == "feedShiny" || param3 == "bonusFeedShiny")
+         {
+            return 1;
+         }
          var _loc4_:Object;
          _loc4_ = _guardians[param1];
          if(_loc4_)
@@ -807,10 +811,6 @@ package
             if(param3)
             {
                _loc16_ = GetGuardianProperty(param1,CREATURES._guardian._foodBonus.Get() + 1,"bonusFeedShiny");
-               if(param4)
-               {
-                  _loc16_ *= 2;
-               }
                if(BASE._credits.Get() < _loc16_)
                {
                   POPUPS.DisplayGetShiny();

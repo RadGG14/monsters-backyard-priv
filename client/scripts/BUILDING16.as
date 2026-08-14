@@ -215,7 +215,7 @@ package
          }
          if(_canFunction && _loc3_ > 0)
          {
-            _finishCost.Set(STORE.GetTimeCost(_loc3_,false) * 4);
+            _finishCost.Set(STORE.GetTimeCost(_loc3_,false));
          }
          else
          {

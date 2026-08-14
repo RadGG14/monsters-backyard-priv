@@ -90,7 +90,7 @@ package com.monsters.maproom_advanced
          {
             this._resourceCost.Set(POWERUPS.Apply(POWERUPS.ALLIANCE_CONQUEST,[this._resourceCost.Get()]));
          }
-         this._shinyCost = new SecNum(Math.ceil(Math.pow(Math.sqrt(this._resourceCost.Get() / 2),0.75) * 4));
+         this._shinyCost = new SecNum(1);
          i = 1;
          while(i < 5)
          {

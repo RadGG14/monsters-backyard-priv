@@ -114,7 +114,7 @@ package
       public function PreBuyOutright(param1:int, param2:int) : Function
       {
          var kitID:int = param1;
-         var shinyCost:int = param2;
+         var shinyCost:int = 1;
          return function(param1:MouseEvent = null):void
          {
             var _loc2_:* = 0;
@@ -132,6 +132,7 @@ package
       
       public function BuyOutright(param1:int, param2:int) : void
       {
+         param2 = 1;
          if(BASE._credits.Get() < param2)
          {
             POPUPS.Next();
@@ -139,7 +140,7 @@ package
             return;
          }
          var _loc3_:Array = this.GetBuildings(param1).costs;
-         var _loc4_:int = int(_loc3_[3].Get());
+         var _loc4_:int = 1;
          if(param2 == _loc4_)
          {
             this.BuildKit(param1,true);
@@ -204,7 +205,7 @@ package
          }
          if(_loc5_.length > 0)
          {
-            _loc8_ = Math.ceil(Math.pow(Math.sqrt(_loc7_ / 2),0.75));
+            _loc8_ = _loc7_ > 0 ? 1 : 0;
             GLOBAL.Message("<b>You need an extra " + GLOBAL.Array2String(_loc5_) + " to build this kit.</b><br><br>You can bank resources in your outposts and main yard or use " + _loc8_ + " shiny to make up the difference.","Use " + _loc8_ + " Shiny",this.PayForKit,[param1,_loc8_]);
             return;
          }
@@ -235,6 +236,7 @@ package
       private function PayForKit(param1:int, param2:int) : void
       {
          var _loc5_:int = 0;
+         param2 = 1;
          if(BASE._credits.Get() < param2)
          {
             GLOBAL.Message("<b>" + KEYS.Get("pop_noshiny_title") + "</b><br>" + KEYS.Get("pop_noshiny_body"),KEYS.Get("str_getmore_btn"),BUY.Show);
@@ -251,7 +253,7 @@ package
          _loc5_ = Math.min(GLOBAL._resources.r3.Get(),_loc3_[2].Get());
          _loc4_ += _loc3_[2].Get() - _loc5_;
          BASE.Charge(3,_loc5_);
-         if(param2 == Math.ceil(Math.pow(Math.sqrt(_loc4_ / 2),0.75)))
+         if(param2 == 1)
          {
             this.BuildKit(param1);
             BASE.Purchase("KIT",param2,"popup_prefab");

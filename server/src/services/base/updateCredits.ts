@@ -55,7 +55,7 @@ export const updateCredits = (ctx: Context, save: Save, item: string, quantity: 
 
   // Handle purchases not in the store
   if (purchaseKeys.has(item)) {
-    userSave.credits = clampShiny(userSave.credits - quantity);
+    userSave.credits = clampShiny(userSave.credits - 1);
     return;
   }
 
@@ -76,14 +76,11 @@ export const updateCredits = (ctx: Context, save: Save, item: string, quantity: 
     return;
   }
 
-  let itemCost: number = storeItem.c[0];
+  // The item has already been added to store data by the caller, so subtract
+  // one to obtain the price for the level being bought. Positive prices have
+  // been normalised to one in storeItems; zero-price entries remain free.
+  const currentQuantity = Math.max(0, (save.storedata?.[item]?.q ?? 1) - 1);
+  const itemCost = storeItem.c[Math.min(currentQuantity, storeItem.c.length - 1)] ?? 0;
 
-  if (storeItem.c.length > 1) {
-    // The item has a scaling cost depending on how many of that item the player currently owns
-    // We subtract 1 here since the item would've been already added to the player's save by the caller
-    const currentQuantity: number = save.storedata?.[item].q - 1;
-    itemCost = storeItem.c[currentQuantity];
-  }
-
-  userSave.credits = clampShiny(userSave.credits - itemCost * quantity);
+  if (itemCost > 0) userSave.credits = clampShiny(userSave.credits - 1);
 };

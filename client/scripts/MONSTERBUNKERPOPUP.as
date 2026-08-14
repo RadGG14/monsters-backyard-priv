@@ -634,6 +634,10 @@ package
                _loc3_.Add(this.GetCost(_loc2_,this._selected[_loc2_].Get()));
                _loc4_.push([this._selected[_loc2_].Get(),KEYS.Get(CREATURELOCKER._creatures[_loc2_].name)]);
             }
+            if(_loc3_.Get() > 0)
+            {
+               _loc3_.Set(1);
+            }
             if(_loc3_.Get() <= BASE._credits.Get())
             {
                for(_loc2_ in this._selected)

@@ -575,7 +575,7 @@ package
                   }
                   _loc9_++;
                }
-               _loc4_ = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
+               _loc4_ = _loc3_ > 0 ? 1 : 0;
                if(_loc2_)
                {
                   GLOBAL.Message(_loc7_ ? KEYS.Get("inf_buildoptions_err_moresilos") : KEYS.Get("buildoptions_err_moresilos"));
@@ -629,7 +629,7 @@ package
                }
                _loc9_++;
             }
-            _loc4_ = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
+            _loc4_ = _loc3_ > 0 ? 1 : 0;
             if(_loc2_)
             {
                GLOBAL.Message(_loc6_ || BASE.isInfernoMainYardOrOutpost ? KEYS.Get("inf_buildoptions_err_moresilosupgrade") : KEYS.Get("buildoptions_err_moresilosupgrade"));
@@ -694,7 +694,7 @@ package
                }
                _loc7_++;
             }
-            _loc4_ = Math.ceil(Math.pow(Math.sqrt(_loc3_ / 2),0.75));
+            _loc4_ = _loc3_ > 0 ? 1 : 0;
             if(_loc2_)
             {
                GLOBAL.Message(KEYS.Get("buildoptions_err_moresilosfortify"));
@@ -736,13 +736,7 @@ package
                _loc7_ = 0;
             }
             _loc8_ = _loc6_.r1.Get() + _loc6_.r2.Get() + _loc6_.r3.Get();
-            _loc9_ = Math.ceil(Math.pow(Math.sqrt(_loc8_ / 2),0.75));
-            _loc10_ = STORE.GetTimeCost(_loc7_);
-            _loc11_ = _loc9_ + _loc10_;
-            if((_loc11_ = int(_loc11_ * 0.95)) <= 5)
-            {
-               _loc11_ = 5;
-            }
+            _loc11_ = 1;
             if(_loc11_ > BASE._credits.Get())
             {
                POPUPS.DisplayGetShiny();
@@ -808,7 +802,7 @@ package
             }
             _loc8_++;
          }
-         _loc4_ = Math.ceil(Math.pow(Math.sqrt(_loc2_ / 2),0.75));
+         _loc4_ = _loc2_ > 0 ? 1 : 0;
          if(_loc3_)
          {
             GLOBAL.Message(KEYS.Get("msg_overcapacity"));
@@ -871,7 +865,7 @@ package
             }
             _loc7_++;
          }
-         var _loc8_:int = Math.ceil(Math.pow(Math.sqrt(_loc5_ / 2),0.75));
+         var _loc8_:int = _loc5_ > 0 ? 1 : 0;
          if(_loc6_)
          {
             GLOBAL.Message(KEYS.Get("msg_overcapacity"));
@@ -919,7 +913,7 @@ package
             }
             _loc6_++;
          }
-         _loc4_ = Math.ceil(Math.pow(Math.sqrt(_loc2_ / 2),0.75));
+         _loc4_ = _loc2_ > 0 ? 1 : 0;
          if(_loc3_)
          {
             GLOBAL.Message(KEYS.Get("msg_overcapacity"));

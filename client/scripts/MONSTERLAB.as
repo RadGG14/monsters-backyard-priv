@@ -80,9 +80,11 @@ package
       
       public static function GetShinyCost(param1:String, param2:int) : int
       {
-         var _loc3_:int = STORE.GetTimeCost(GetTimeCost(param1,param2),false);
-         var _loc4_:int = Math.ceil(Math.pow(Math.sqrt(GetPuttyCost(param1,param2) / 2),0.75));
-         return _loc3_ + _loc4_;
+         if(GetTimeCost(param1,param2) <= 0 && GetPuttyCost(param1,param2) <= 0)
+         {
+            return 0;
+         }
+         return 1;
       }
       
       override public function SetProps() : void

@@ -383,9 +383,7 @@ package
             mcButtons.bStart.addEventListener(MouseEvent.CLICK,this.Start);
             putty = int(CREATURELOCKER._creatures[this._creatureID].resource);
             time = int(CREATURELOCKER._creatures[this._creatureID].time);
-            timeCost = STORE.GetTimeCost(time);
-            resourcesCost = Math.ceil(Math.pow(Math.sqrt(putty / 2),0.75));
-            this._instantUnlockCost = timeCost + resourcesCost;
+            this._instantUnlockCost = 1;
             bInstant.Setup(KEYS.Get("btn_unlockinstantly",{"v1":this._instantUnlockCost}));
             bInstant.visible = true;
             bInstant.Enabled = true;

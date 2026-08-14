@@ -138,7 +138,7 @@ export const baseModeAttack = async ({ user, baseid, mapversion, attackCost }: B
       const [r1, r2, r3] = attackCost.resources;
       updateResources({ r1, r2, r3 }, userSave.resources!, Operation.SUBTRACT);
     } else if (attackCost.shiny) {
-      userSave.credits = clampShiny(userSave.credits - attackCost.shiny);
+      userSave.credits = clampShiny(userSave.credits - 1);
     }
   }
 

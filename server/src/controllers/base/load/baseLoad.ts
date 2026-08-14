@@ -35,6 +35,8 @@ import { calculateBaseLevel } from "../../../services/base/calculateBaseLevel.js
 import { mapSaveData } from "../../../services/base/mapSaveData.js";
 import { extractTownHall } from "../../../utils/extractTownHall.js";
 import { getChatChannel, getOrCreateChatToken, INFERNO_CHAT_CHANNEL } from "../../../chat/chatChannels.js";
+import { clampShiny } from "../../../config/GameConfig.js";
+import { rewardCredits } from "../../../game-data/store/purchaseKeys.js";
 
 /**
  * Controller responsible for loading base modes based on the user's request.
@@ -113,6 +115,34 @@ export const baseLoad: KoaController = async (ctx) => {
   if (!baseSave) throw new Error("Base save not found.");
 
   const userSave = user.save!;
+
+  // The social fan action is unavailable in the test client. Grant its one-time
+  // shiny reward when the player next opens one of their yards, then mark the
+  // quest as collected so it cannot be claimed again through the client.
+  if (type === BaseMode.BUILD && baseSave.userid === user.userid) {
+    const storeData = userSave.storedata ?? {};
+    const quests = userSave.quests ?? {};
+    let saveChanged = false;
+
+    if ((storeData.QFAN_TEST_REWARD?.q ?? 0) === 0) {
+      storeData.QFAN_TEST_REWARD = { q: 1 };
+      if ((storeData.QFAN?.q ?? 0) === 0) storeData.QFAN = { q: 1 };
+      userSave.storedata = storeData;
+      userSave.credits = clampShiny(userSave.credits + rewardCredits.QFAN);
+      saveChanged = true;
+    }
+
+    if (quests.FAN !== 2) {
+      quests.FAN = 2;
+      userSave.quests = quests;
+      saveChanged = true;
+    }
+
+    if (saveChanged) {
+      postgres.em.persist(userSave);
+      await postgres.em.flush();
+    }
+  }
 
   if (type === BaseMode.BUILD && mapversion === MapRoomVersion.V1) {
     userSave.level = calculateBaseLevel(userSave.points, userSave.basevalue);

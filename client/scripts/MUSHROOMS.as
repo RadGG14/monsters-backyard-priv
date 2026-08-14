@@ -272,33 +272,23 @@ package
          if (isGolden)
          {
             ++QUESTS._global.goldmushroomspicked;
-            GLOBAL.ValidateMushroomPick(mushroom);
          }
+         GLOBAL.ValidateMushroomPick(mushroom);
 
          mushroom.RecycleC();
 
+         var mushroomVariant:int = isGolden ? 2 : 1;
+         shinyAwarded = isGolden ? BONUS_MUSHROOM_SHINY_REWARD : MUSHROOM_SHINY_REWARD;
+         workerMessage = KEYS.Get("pop_mushroom_msg1", { "v1":shinyAwarded });
+         BASE.Purchase("MUSHROOM" + mushroomVariant, 1, "MUSHROOMS");
+
          if (isGolden)
          {
-            var mushroomVariant:int = int(Math.random() * 3 + 1);
-            
-            if (mushroomVariant == 3) mushroomVariant = 1;
-
-            shinyAwarded = mushroomVariant == 2 ? BONUS_MUSHROOM_SHINY_REWARD : MUSHROOM_SHINY_REWARD;
-            workerMessage = KEYS.Get("pop_mushroom_msg1", { "v1":shinyAwarded });
-
-            BASE.Purchase("MUSHROOM" + mushroomVariant, 1, "MUSHROOMS");
-
             var shinyPopup:popup_mushroomshiny = new popup_mushroomshiny();
             shinyPopup.tTitle.htmlText = "<b>" + KEYS.Get("pop_goldenmushroom_title") + "</b>";
             shinyPopup.tMessage.htmlText = KEYS.Get("pop_goldenmushroom_desc", { "v1":shinyAwarded });
 
             POPUPS.Push(shinyPopup,null,null,"chaching","goldmushroom.png");
-         }
-         else
-         {
-            var flavourKeys:Array = ["pop_mushroom_msg2", "pop_mushroom_msg3", "pop_mushroom_msg4"];
-            workerMessage = KEYS.Get(flavourKeys[int(Math.random() * flavourKeys.length)]);
-            BASE.Save();
          }
 
          LOGGER.Stat([34, shinyAwarded]);

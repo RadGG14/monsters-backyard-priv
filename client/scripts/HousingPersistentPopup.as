@@ -503,7 +503,7 @@ package
             _loc1_ += this.m_monsterBarList[_loc2_].getTimeCost(true);
             _loc1_ += this.m_monsterBarList[_loc2_].getResourceCostInShiny();
          }
-         return _loc1_;
+         return _loc1_ > 0 ? 1 : 0;
       }
       
       private function updateHealAllButton() : void

@@ -80,6 +80,8 @@ package
       public static var _repairCount:int = 0;
       
       public static var _allowInfernoResourcesAboveGround:Boolean = true;
+
+      private static const TEST_SHINY_COST:int = 1;
        
       
       public function STORE()
@@ -156,7 +158,7 @@ package
                _loc6_++;
             }
          }
-         return _loc3_;
+         return _loc3_ > 0 ? TEST_SHINY_COST : 0;
       }
       
       private static function getShinyCostforCreep(param1:String) : int
@@ -166,28 +168,29 @@ package
          var _loc4_:int = 0;
          _loc3_ = GLOBAL.getShinyCostFromResourceAmt(GLOBAL.player.getResourceCostByID(param1) - GLOBAL.player.getResourceCostByID(param1,true));
          _loc4_ = _loc2_.getSecsTillDoneByID(param1,true);
-         return _loc3_ + STORE.GetTimeCost(_loc4_,false) * GLOBAL.ABTestHealingTimeShinyMod();
+         return _loc3_ > 0 || _loc4_ > 0 ? TEST_SHINY_COST : 0;
       }
       
       public static function GetInstantBuyCost(param1:Object) : int
       {
-         // TODO: @React / @ambx - fix SecNum
-         //return GetTimeCost(param1.time.Get()) + GetResourceCost([param1.r1,param1.r2,param1.r3,param1.r4]);
-         return GetTimeCost(param1.time) + GetResourceCost([param1.r1,param1.r2,param1.r3,param1.r4]);
-
+         if(param1.time <= 0 && param1.r1 <= 0 && param1.r2 <= 0 && param1.r3 <= 0 && param1.r4 <= 0)
+         {
+            return 0;
+         }
+         return TEST_SHINY_COST;
       }
       
       public static function GetTimeCost(param1:int, param2:Boolean = true) : int
       {
-         var _loc3_:int = 0;
-         var _loc4_:int = 0;
+         if(param1 <= 0)
+         {
+            return 0;
+         }
          if(param2 && param1 <= 300)
          {
             return 0;
          }
-         _loc3_ = Math.ceil(param1 * 20 / 60 / 60);
-         _loc4_ = int(Math.sqrt(param1 * 0.8));
-         return Math.min(_loc3_,_loc4_);
+         return TEST_SHINY_COST;
       }
       
       public static function GetResourceCost(param1:Array) : int
@@ -204,7 +207,34 @@ package
       
       public static function GetShinyCostFromTotalResources(param1:Number) : int
       {
-         return Math.ceil(Math.pow(Math.sqrt(param1 / 2),0.75));
+         return param1 > 0 ? TEST_SHINY_COST : 0;
+      }
+
+      private static function applyTestShinyCosts() : void
+      {
+         var _loc1_:String = null;
+         var _loc2_:Array = null;
+         var _loc3_:int = 0;
+         if(!_storeItems)
+         {
+            return;
+         }
+         for(_loc1_ in _storeItems)
+         {
+            _loc2_ = _storeItems[_loc1_].c as Array;
+            if(_loc2_)
+            {
+               _loc3_ = 0;
+               while(_loc3_ < _loc2_.length)
+               {
+                  if(Number(_loc2_[_loc3_]) > 0)
+                  {
+                     _loc2_[_loc3_] = TEST_SHINY_COST;
+                  }
+                  _loc3_++;
+               }
+            }
+         }
       }
       
       public static function Variables() : void
@@ -631,6 +661,7 @@ package
             _storeItems.EXH.d = KEYS.Get(BASE.isInfernoMainYardOrOutpost ? "store_exhi_desc" : "store_exh_desc");
             _storeItems.EXH.t = KEYS.Get("store_exh_title");
          }
+         applyTestShinyCosts();
       }
       
       public static function AddInventory(param1:String) : void

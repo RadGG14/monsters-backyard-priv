@@ -51,7 +51,7 @@ export const takeoverCell: KoaController = async (ctx) => {
 
   await validateRange(currentUser, userSave, mapversion, { attackCell: cell });
 
-  if (shiny) userSave.credits = clampShiny(userSave.credits - shiny);
+  if (shiny) userSave.credits = clampShiny(userSave.credits - 1);
   if (resources)
     userSave.resources = updateResources(
       resources,

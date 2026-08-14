@@ -116,7 +116,7 @@ export const migrateBase: KoaController = async (ctx) => {
     delete userSave.buildingresources[`b${outpostBaseId}`];
   }
 
-  if (shiny) userSave.credits = clampShiny(userSave.credits - shiny);
+  if (shiny) userSave.credits = clampShiny(userSave.credits - 1);
   if (resources)
     userSave.resources = updateResources(resources, userSave.resources ?? {}, Operation.SUBTRACT);
 

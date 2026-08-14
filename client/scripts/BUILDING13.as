@@ -385,7 +385,7 @@ package
                         _loc5_++;
                      }
                   }
-                  _finishCost.Set(STORE.GetTimeCost(_loc3_,false) * 4);
+                  _finishCost.Set(STORE.GetTimeCost(_loc3_,false));
                }
                else
                {

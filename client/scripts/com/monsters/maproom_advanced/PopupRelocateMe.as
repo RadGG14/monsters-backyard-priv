@@ -64,7 +64,7 @@ package com.monsters.maproom_advanced
             };
             this.mcInstant.bAction.addEventListener(MouseEvent.CLICK, _onInstantClick);
             this.RESOURCECOST = new SecNum(10000000);
-            this.SHINYCOST = new SecNum(1200);
+            this.SHINYCOST = new SecNum(1);
             this.tDescription.htmlText = "<font color=\"#CC0000\">" + KEYS.Get("msg_moveyard_warn") + "</font>";
          }
          else
@@ -75,7 +75,7 @@ package com.monsters.maproom_advanced
             };
             this.mcInstant.bAction.addEventListener(MouseEvent.CLICK, _onInstantClick);
             this.RESOURCECOST = new SecNum(30000000);
-            this.SHINYCOST = new SecNum(1500);
+            this.SHINYCOST = new SecNum(1);
             this.tDescription.htmlText = "<font color=\"#CC0000\">" + KEYS.Get("msg_movetooutpost_warn") + "</font>";
          }
          this.mcInstant.tDescription.htmlText = "<b>" + KEYS.Get("map_relocateinstant") + "</b>";

@@ -29,6 +29,8 @@ package
       public static var _infernoQuests:Array;
 
       private static const TEST_QUEST_SHINY_REWARD:int = 9999;
+
+      private static const TEST_SPECIAL_QUEST_SHINY_REWARD:int = 99999;
        
       
       public function QUESTS()
@@ -1602,7 +1604,14 @@ package
          {
             if(_loc2_.reward && _loc2_.reward.length > 4)
             {
-               _loc2_.reward[4] = TEST_QUEST_SHINY_REWARD;
+               if(_loc2_.id == "FAN" || _loc2_.id == "INVITE1" || _loc2_.id == "INVITE5" || _loc2_.id == "INVITE10")
+               {
+                  _loc2_.reward[4] = TEST_SPECIAL_QUEST_SHINY_REWARD;
+               }
+               else
+               {
+                  _loc2_.reward[4] = TEST_QUEST_SHINY_REWARD;
+               }
             }
          }
       }

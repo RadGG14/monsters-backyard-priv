@@ -536,7 +536,7 @@ package
                      mcInstant.tDescription.htmlText = "<b>" + KEYS.Get("gcage_instantEvolve") + "</b>";
                      mcInstant.bAction.Highlight = false;
                      mcInstant.bAction.Enabled = true;
-                     _loc8_ = (_loc8_ = (_loc8_ = CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedShiny")) * 2) * (CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedCount") - CREATURES._guardian._feeds.Get());
+                     _loc8_ = 1;
                      mcInstant.bAction.Setup(KEYS.Get("btn_useshiny",{"v1":_loc8_}),false,0,0);
                      mcInstant.bAction.removeEventListener(MouseEvent.CLICK,this.InstantClick);
                      mcInstant.bAction.addEventListener(MouseEvent.CLICK,this.EvolveClick);
@@ -592,7 +592,7 @@ package
                      mcInstant.tDescription.htmlText = "<b>" + KEYS.Get("gcage_instantBuffAdd") + "</b>";
                      mcInstant.bAction.Highlight = false;
                      mcInstant.bAction.Enabled = true;
-                     _loc8_ = (_loc8_ = CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._foodBonus.Get() + 1,"bonusFeedShiny")) * 2;
+                     _loc8_ = 1;
                      mcInstant.bAction.Setup(KEYS.Get("btn_useshiny",{"v1":_loc8_}),false,0,0);
                      mcInstant.bAction.removeEventListener(MouseEvent.CLICK,this.InstantClick);
                      if(CREATURES._guardian._foodBonus.Get() >= 3)
@@ -1391,15 +1391,12 @@ package
          var _loc2_:int = 0;
          if(CREATURES._guardian._level.Get() < 6)
          {
-            _loc2_ = CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedShiny");
-            _loc2_ *= 2;
-            _loc2_ *= CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedCount") - CREATURES._guardian._feeds.Get();
+            _loc2_ = 1;
             this.EvolveClickB();
          }
          else if(CREATURES._guardian._level.Get() == 6)
          {
-            _loc2_ = CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._foodBonus.Get(),"bonusFeedShiny");
-            _loc2_ *= 2;
+            _loc2_ = 1;
             this.EvolveClickB();
          }
       }
@@ -1409,9 +1406,7 @@ package
          var _loc1_:int = 0;
          if(CREATURES._guardian._level.Get() < 6)
          {
-            _loc1_ = CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedShiny");
-            _loc1_ *= 2;
-            _loc1_ *= CHAMPIONCAGE.GetGuardianProperty(CREATURES._guardian._creatureID,CREATURES._guardian._level.Get(),"feedCount") - CREATURES._guardian._feeds.Get();
+            _loc1_ = 1;
             if(BASE._credits.Get() < _loc1_)
             {
                POPUPS.DisplayGetShiny();
