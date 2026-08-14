@@ -272,7 +272,7 @@ package
          },{
             "order":9,
             "list":true,
-            "reward":[0,0,0,1000,0],
+            "reward":[0,0,0,1000,9999],
             "id":"C17",
             "group":2,
             "name":"q_c17_name",
@@ -287,7 +287,7 @@ package
          },{
             "order":10,
             "list":true,
-            "reward":[6500,6500,500,1500,0],
+            "reward":[6500,6500,500,1500,9999],
             "id":"WM1",
             "group":2,
             "name":"q_wm1_name",
@@ -302,7 +302,7 @@ package
          },{
             "order":11,
             "list":true,
-            "reward":[1000,1000,0,1000,0],
+            "reward":[1000,1000,0,1000,9999],
             "id":"CR2",
             "group":1,
             "name":"q_cr2_name",
@@ -314,7 +314,7 @@ package
          },{
             "order":36,
             "list":true,
-            "reward":[20000,0,0,0,0],
+            "reward":[20000,0,0,0,998766],
             "id":"C51",
             "group":2,
             "name":"q_c51_name",
@@ -329,7 +329,7 @@ package
          },{
             "order":15,
             "list":true,
-            "reward":[2000,2000,1000,1000,0],
+            "reward":[2000,2000,1000,1000,998766],
             "id":"S1",
             "group":0,
             "name":"q_s1_name",
@@ -359,7 +359,7 @@ package
          },{
             "order":19,
             "list":true,
-            "reward":[1000,1000,5000,0,0],
+            "reward":[1000,1000,5000,0,998766],
             "id":"CR1",
             "group":1,
             "name":"q_cr1_name",
@@ -375,7 +375,7 @@ package
          },{
             "order":12,
             "list":true,
-            "reward":[8000,8000,8000,8000,0],
+            "reward":[8000,8000,8000,8000,998766],
             "id":"C3",
             "group":0,
             "name":"q_c3_name",
@@ -395,7 +395,7 @@ package
          },{
             "order":16,
             "list":true,
-            "reward":[4000,4000,0,500,0],
+            "reward":[4000,4000,0,500,998766],
             "id":"C13",
             "group":0,
             "name":"q_c13_name",
@@ -410,7 +410,7 @@ package
          },{
             "order":14,
             "list":true,
-            "reward":[2000,2000,0,0,0],
+            "reward":[2000,2000,0,0,998766],
             "id":"T2",
             "group":0,
             "name":"q_t2_name",
@@ -425,7 +425,7 @@ package
          },{
             "order":46,
             "list":true,
-            "reward":[10000,10000,10000,0,0],
+            "reward":[10000,10000,10000,0,998766],
             "id":"T3",
             "group":0,
             "name":"q_t3_name",
@@ -440,7 +440,7 @@ package
          },{
             "order":23,
             "list":true,
-            "reward":[20000,0,0,0,0],
+            "reward":[20000,0,0,0,998766],
             "id":"C9",
             "group":0,
             "name":"q_c9_name",
@@ -455,7 +455,7 @@ package
          },{
             "order":24,
             "list":true,
-            "reward":[0,10000,0,0,0],
+            "reward":[0,10000,0,0,998766],
             "id":"C10",
             "group":0,
             "name":"q_c10_name",
@@ -470,7 +470,7 @@ package
          },{
             "order":25,
             "list":true,
-            "reward":[0,0,2500,0,0],
+            "reward":[0,0,2500,0,998766],
             "id":"C11",
             "group":0,
             "name":"q_c11_name",
@@ -485,7 +485,7 @@ package
          },{
             "order":26,
             "list":true,
-            "reward":[0,0,0,2000,0],
+            "reward":[0,0,0,2000,998766],
             "id":"C12",
             "group":0,
             "name":"q_c12_name",
@@ -500,7 +500,7 @@ package
          },{
             "order":27,
             "list":true,
-            "reward":[4000,4000,2000,2000,0],
+            "reward":[4000,4000,2000,2000,998766],
             "id":"S2",
             "group":0,
             "name":"q_s2_name",
@@ -516,7 +516,7 @@ package
          },{
             "order":29,
             "list":true,
-            "reward":[20000,0,0,0,0],
+            "reward":[20000,0,0,0,998766],
             "id":"C4",
             "group":0,
             "name":"q_c4_name",
@@ -744,7 +744,7 @@ package
          },{
             "order":66,
             "list":true,
-            "reward":[10000,10000,20000,20000,99999],
+            "reward":[10000,10000,20000,20000,998766],
             "id":"M3",
             "group":3,
             "name":"q_m3_name",
@@ -760,7 +760,7 @@ package
          },{
             "order":44,
             "list":true,
-            "reward":[9999,9999,9999,9999,99999],
+            "reward":[9999,9999,9999,9999,998766],
             "id":"BL1",
             "group":4,
             "name":"q_bl1_name",
@@ -791,7 +791,7 @@ package
          },{
             "order":60,
             "list":true,
-            "reward":[9999,9999,9999,9999,99999],
+            "reward":[9999,9999,9999,9999,998766],
             "id":"BL3",
             "group":4,
             "name":"q_bl3_name",
@@ -807,7 +807,7 @@ package
          },{
             "order":61,
             "list":true,
-            "reward":[0,0,1000000,1000000,99999],
+            "reward":[0,0,1000000,1000000,998766],
             "id":"BL4",
             "group":4,
             "name":"q_bl4_name",
@@ -823,7 +823,7 @@ package
          },{
             "order":28,
             "list":true,
-            "reward":[1000,1000,1000,1000,99999],
+            "reward":[1000,1000,1000,1000,998766],
             "id":"BK1",
             "group":3,
             "name":"q_bk1_name",
@@ -1395,7 +1395,7 @@ package
          _quests.push({
             "order":59,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW4",
             "group":2,
             "name":"q_unlockweapon_name",
@@ -1415,7 +1415,7 @@ package
          _quests.push({
             "order":60,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW5",
             "group":2,
             "name":"q_unlockweapon_name",
@@ -1435,7 +1435,7 @@ package
          _quests.push({
             "order":61,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW6",
             "group":2,
             "name":"q_unlockweapon_name",
@@ -1455,7 +1455,7 @@ package
          _quests.push({
             "order":62,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW7",
             "group":2,
             "name":"q_upgradeweapon_name",
@@ -1478,7 +1478,7 @@ package
          _quests.push({
             "order":63,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW8",
             "group":2,
             "name":"q_upgradeweapon_name",
@@ -1501,7 +1501,7 @@ package
          _quests.push({
             "order":64,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW9",
             "group":2,
             "name":"q_upgradeweapon_name",
@@ -1524,7 +1524,7 @@ package
          _quests.push({
             "order":65,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW10",
             "group":2,
             "name":"q_upgradeweapon_name",
@@ -1570,7 +1570,7 @@ package
          _quests.push({
             "order":67,
             "list":true,
-            "reward":[0,0,0,0,0],
+            "reward":[0,0,0,0,998766],
             "id":"SW12",
             "group":2,
             "name":"q_upgradeweapon_name",
