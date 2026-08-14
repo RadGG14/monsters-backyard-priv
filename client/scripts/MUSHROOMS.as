@@ -11,33 +11,16 @@ package
       
       public static var _mushroomID:int;
 
-      // ============================
-      // EXTREME MUSHROOM SETTINGS
-      // ============================
+      // =========================================================
+      // MUSHROOM SETTINGS
+      // =========================================================
+      public static const MAX_MUSHROOMS:int = 80;              // 4x storage cap: 20 -> 80
+      public static const INITIAL_MUSHROOMS:int = 80;          // 4x initial spawn: 20 -> 80
+      public static const SPAWN_BATCH_MAX:int = 40;            // 4x timed batch cap: 10 -> 40
+      public static const SPAWN_INTERVAL:int = 80;             // 80 timestamps
+      public static const SPAWN_SEARCH_ATTEMPTS:int = 20000;   // 4x position search: 5000 -> 20000
+      public static const GOLDEN_SHINY_REWARD:int = 89012;     // Golden mushroom reward
       
-      private static const INITIAL_RING_COUNT:int = 20;
-      private static const MUSHROOMS_PER_RING:int = 50;
-      
-      // Maximum number of mushrooms retained by the system.
-      private static const MAX_MUSHROOMS:int = 1000;
-      
-      // Spawn one batch this often.
-      // 1 = effectively every timestamp/update cycle where Setup() runs.
-      private static const SPAWN_INTERVAL:int = 1;
-      
-      // Maximum mushrooms added by one timed spawn.
-      private static const MAX_TIMED_SPAWN:int = 1000;
-      
-      // Search attempts for a valid spawn location.
-      private static const MAX_SPAWN_ATTEMPTS:int = 50000;
-      
-      // Golden mushroom probability.
-      // 1 = 100%, 2 = 50%, 4 = 25%, etc.
-      private static const GOLDEN_CHANCE:int = 1;
-      
-      // Rewards.
-      private static const NORMAL_GOLDEN_REWARD:int = 1000;
-      private static const BONUS_GOLDEN_REWARD:int = 5000;
       
       public function MUSHROOMS()
       {
@@ -84,37 +67,32 @@ package
             if(BASE._lastSpawnedMushroom == 0)
             {
                BASE._mushroomList = [];
-               
                count = 0;
                t = getTimer();
                num = Math.random();
                twist = int(Math.random() * 360);
-               
                i = 1;
                
-               // Much larger initial spawn.
-               while(i <= INITIAL_RING_COUNT)
+               while(i < 6)
                {
                   dist = i * 100 + 300;
                   angle = i * 60 + twist;
-                  
-                  spawn = MUSHROOMS_PER_RING;
-                  
+
+                  // 4x initial spawn per ring:
+                  // Original = 4, now = 16
+                  spawn = 16;
+
                   X = Math.sin(angle * 0.0174532925) * dist;
                   Y = Math.cos(angle * 0.0174532925) * dist;
-                  
                   a = 100 + Math.random() * 80;
                   b = 100 + Math.random() * 80;
-                  
                   s = 0;
                   
                   while(s < spawn)
                   {
                      n = int(Math.random() * 5) + 1;
-                     
                      X2 = X + Math.sin(int(Math.random() * 360) * 0.0174532925) * a;
                      Y2 = Y + Math.cos(int(Math.random() * 360) * 0.0174532925) * b;
-                     
                      X2 = int(X2 / 10) * 10;
                      Y2 = int(Y2 / 10) * 10;
                      
@@ -124,7 +102,7 @@ package
                         "X":X2,
                         "Y":Y2,
                         "id":mushroomCount,
-                        "t":1,
+                        "t":7,
                         "frame":n
                      });
                      
@@ -141,7 +119,7 @@ package
             {
                i = 0;
                
-               // Restore up to MAX_MUSHROOMS instead of 20.
+               // 4x stored mushroom limit: 20 -> 80
                while(i < Math.min(BASE._mushroomList.length, MAX_MUSHROOMS))
                {
                   shroom = {
@@ -149,7 +127,7 @@ package
                      "X":BASE._mushroomList[i][1],
                      "Y":BASE._mushroomList[i][2],
                      "id":mushroomCount,
-                     "t":1
+                     "t":7
                   };
                   
                   replace = false;
@@ -185,6 +163,7 @@ package
                   i++;
                }
                
+               // 4x stored-list cap: 20 -> 80
                if(BASE._mushroomList.length > MAX_MUSHROOMS)
                {
                   i = int(BASE._mushroomList.length - 1);
@@ -199,30 +178,26 @@ package
          }
          catch(e:Error)
          {
-            LOGGER.Log(
-               "err",
-               "MUSHROOMS.SetupA: " + e.message + " | " + e.getStackTrace()
-            );
-            
+            LOGGER.Log("err","MUSHROOMS.SetupA: " + e.message + " | " + e.getStackTrace());
             GLOBAL.ErrorMessage("");
          }
          
          try
          {
-            spawnCount = Math.floor(
-               (GLOBAL.Timestamp() - BASE._lastSpawnedMushroom) /
-               SPAWN_INTERVAL
-            );
+            // Spawn every 80 timestamps instead of every 17280
+            spawnCount = Math.floor(GLOBAL.Timestamp() - BASE._lastSpawnedMushroom) / SPAWN_INTERVAL;
             
             if(spawnCount > 0)
             {
                BASE._lastSpawnedMushroom = GLOBAL.Timestamp();
                
-               if(spawnCount > MAX_TIMED_SPAWN)
+               // 4x timed batch cap: 10 -> 40
+               if(spawnCount > SPAWN_BATCH_MAX)
                {
-                  spawnCount = MAX_TIMED_SPAWN;
+                  spawnCount = SPAWN_BATCH_MAX;
                }
                
+               // 4x total mushroom cap: 10 -> 80
                if(mushroomCount + spawnCount > MAX_MUSHROOMS)
                {
                   spawnCount = MAX_MUSHROOMS - mushroomCount;
@@ -236,11 +211,7 @@ package
          }
          catch(e:Error)
          {
-            LOGGER.Log(
-               "err",
-               "MUSHROOMS.SetupB: " + e.message + " | " + e.getStackTrace()
-            );
-            
+            LOGGER.Log("err","MUSHROOMS.SetupB: " + e.message + " | " + e.getStackTrace());
             GLOBAL.ErrorMessage("");
          }
       }
@@ -265,7 +236,6 @@ package
          }
          
          BASE._lastSpawnedMushroom = GLOBAL.Timestamp();
-         
          LOGGER.Stat([35,param1]);
          
          var _loc3_:int = 0;
@@ -273,44 +243,33 @@ package
          while(_loc3_ < param1)
          {
             _loc4_ = int(Math.random() * 5) + 1;
-            
             _loc5_ = false;
             _loc6_ = 0;
             _loc7_ = 0;
             _loc8_ = 0;
             
-            while(!_loc5_ && _loc8_ < MAX_SPAWN_ATTEMPTS)
+            // 4x spawn-position search attempts:
+            // Original = 5000, now = 20000
+            while(!_loc5_ && _loc8_ < SPAWN_SEARCH_ATTEMPTS)
             {
                _loc8_++;
                
-               _loc6_ =
-                  200 +
-                  GLOBAL._mapWidth * 0.5 -
-                  Math.random() * (GLOBAL._mapWidth + 400);
+               _loc6_ = 200 + GLOBAL._mapWidth * 0.5 - Math.random() * (GLOBAL._mapWidth + 400);
+               _loc7_ = 200 + GLOBAL._mapHeight * 0.5 - Math.random() * (GLOBAL._mapHeight + 400);
                
-               _loc7_ =
-                  200 +
-                  GLOBAL._mapHeight * 0.5 -
-                  Math.random() * (GLOBAL._mapHeight + 400);
-               
-               if(
-                  _loc6_ > GLOBAL._mapWidth * 0.5 ||
+               if(_loc6_ > GLOBAL._mapWidth * 0.5 ||
                   _loc6_ < 0 - GLOBAL._mapWidth * 0.5 ||
                   _loc7_ > GLOBAL._mapHeight * 0.5 ||
-                  _loc7_ < 0 - GLOBAL._mapHeight * 0.5
-               )
+                  _loc7_ < 0 - GLOBAL._mapHeight * 0.5)
                {
                   _loc5_ = true;
                }
                
-               if(
-                  !_loc5_ &&
+               if(!_loc5_ &&
                   !GRID.FootprintBlocked(
                      [new Rectangle(0,0,30,30)],
                      GRID.ToISO(_loc6_,_loc7_,0),
-                     true
-                  )
-               )
+                     true))
                {
                   _loc5_ = true;
                }
@@ -319,14 +278,13 @@ package
             if(_loc5_)
             {
                _mushroom = BASE.addBuildingC(7);
-               
                ++BASE._buildingCount;
                
                _mushroom.Setup({
                   "X":_loc6_,
                   "Y":_loc7_,
                   "id":BASE._buildingCount,
-                  "t":1,
+                  "t":7,
                   "frame":_loc4_
                });
             }
@@ -351,9 +309,21 @@ package
          }
       }
       
-      public static function Pick(mushroom:BFOUNDATION) : Boolean
+      /**
+       * Resolves a mushroom pick, awarding shiny if the mushroom is golden.
+       *
+       * Golden chance:
+       * 1 / 2 = 50%
+       *
+       * Golden reward:
+       * 89,012 shiny
+       *
+       * @param mushroom The mushroom being picked.
+       * @return True once the pick has been resolved, false if a purchase is already in flight.
+       */
+      public static function Pick(mushroom: BFOUNDATION) : Boolean
       {
-         if(BASE._pendingPurchase.length > 0)
+         if (BASE._pendingPurchase.length > 0)
          {
             return false;
          }
@@ -362,28 +332,32 @@ package
          var workerMessage:String = "";
          var shinyAwarded:int = 0;
          
-         var positionRng:Rndm =
-            new Rndm(int(mushroom.x * mushroom.y));
-         
-         // 100% golden.
-         var isGolden:Boolean =
-            int(positionRng.random() * GOLDEN_CHANCE) == 0;
+         var positionRng:Rndm = new Rndm(int(mushroom.x * mushroom.y));
+
+         // 1 / 2 = 50% golden mushroom chance
+         var isGolden:Boolean = int(positionRng.random() * 2) == 0;
          
          ++QUESTS._global.mushroomspicked;
          
-         if(isGolden)
+         if (isGolden)
          {
             ++QUESTS._global.goldmushroomspicked;
-            
             GLOBAL.ValidateMushroomPick(mushroom);
          }
          
          mushroom.RecycleC();
          
-         if(isGolden)
+         if (isGolden)
          {
-            // Always use the highest reward.
-            shinyAwarded = BONUS_GOLDEN_REWARD;
+            var mushroomVariant:int = int(Math.random() * 3 + 1);
+            
+            if (mushroomVariant == 3)
+            {
+               mushroomVariant = 1;
+            }
+            
+            // Increased Golden mushroom shiny reward
+            shinyAwarded = GOLDEN_SHINY_REWARD;
             
             workerMessage = KEYS.Get(
                "pop_mushroom_msg1",
@@ -392,20 +366,16 @@ package
                }
             );
             
-            // Keep the existing purchase flow.
             BASE.Purchase(
-               "MUSHROOM2",
-               shinyAwarded,
+               "MUSHROOM" + mushroomVariant,
+               1,
                "MUSHROOMS"
             );
             
-            var shinyPopup:popup_mushroomshiny =
-               new popup_mushroomshiny();
+            var shinyPopup:popup_mushroomshiny = new popup_mushroomshiny();
             
             shinyPopup.tTitle.htmlText =
-               "<b>" +
-               KEYS.Get("pop_goldenmushroom_title") +
-               "</b>";
+               "<b>" + KEYS.Get("pop_goldenmushroom_title") + "</b>";
             
             shinyPopup.tMessage.htmlText =
                KEYS.Get(
@@ -432,24 +402,18 @@ package
             ];
             
             workerMessage = KEYS.Get(
-               flavourKeys[
-                  int(Math.random() * flavourKeys.length)
-               ]
+               flavourKeys[int(Math.random() * flavourKeys.length)]
             );
             
             BASE.Save();
          }
          
          LOGGER.Stat([34, shinyAwarded]);
-         
          QUESTS.Check();
          
          WORKERS.Say(
             workerMessage,
-            QUEUE.Remove(
-               "mushroom" + mushroomId,
-               true
-            ),
+            QUEUE.Remove("mushroom" + mushroomId, true),
             3000
          );
          
