@@ -23,7 +23,7 @@ import { BaseType } from "../enums/Base.js";
       return;
     }
 
-    const shinyAmount = 400400;
+    const shinyAmount = 400000000;
 
     const orm = await MikroORM.init(mikroOrmConfig);
     const em = orm.em.fork();
